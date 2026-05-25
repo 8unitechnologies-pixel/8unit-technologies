@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body style={{background:'#050816',color:'white',margin:0,padding:0,overflowX:'hidden',WebkitFontSmoothing:'antialiased'}}>
         <SmoothScroll />
-        <CustomCursor />
+        <div className='desktop-only-cursor'><CustomCursor /></div>
         <ScrollProgress />
         <div className='noise-overlay' aria-hidden='true' />
         {children}

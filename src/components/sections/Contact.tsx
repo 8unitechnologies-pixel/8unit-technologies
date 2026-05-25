@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { Send, CheckCircle2 } from 'lucide-react';
 
@@ -11,9 +11,16 @@ const PUBLIC_KEY = 'SRfIHr1cGIeQpu84d';
 const projectTypes = ['Custom Software','AI Solution','Web Development','Mobile App','Cloud & DevOps','UI/UX Design','Other'];
 
 export default function Contact() {
-  const formRef = useRef(null);
   const [form, setForm] = useState({ from_name: '', from_email: '', project_type: '', message: '' });
   const [status, setStatus] = useState('idle');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,21 +55,21 @@ export default function Contact() {
   };
 
   return (
-    <section id='contact' style={{padding:'120px 48px',position:'relative',overflow:'hidden'}}>
+    <section id='contact' style={{padding: isMobile ? '80px 20px' : '120px 48px',position:'relative',overflow:'hidden'}}>
       <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 60%)',pointerEvents:'none'}} />
       <div style={{maxWidth:1400,margin:'0 auto'}}>
-        <div style={{display:'flex',flexDirection:'row',gap:80,alignItems:'flex-start'}}>
+        <div style={{display:'flex',flexDirection: isMobile ? 'column' : 'row',gap: isMobile ? 40 : 80,alignItems:'flex-start'}}>
 
           <motion.div initial={{opacity:0,x:-40}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.9}} style={{flex:1}}>
             <span style={{display:'inline-flex',alignItems:'center',gap:8,padding:'6px 16px',borderRadius:999,background:'rgba(59,130,246,0.1)',border:'1px solid rgba(59,130,246,0.25)',color:'#3B82F6',fontSize:11,fontWeight:500,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:24}}>
               Get In Touch
             </span>
-            <h2 style={{fontFamily:'Space Grotesk,sans-serif',fontSize:'clamp(36px,4vw,56px)',fontWeight:700,color:'white',margin:'0 0 24px',letterSpacing:'-0.02em',lineHeight:1.1}}>
+            <h2 style={{fontFamily:'Space Grotesk,sans-serif',fontSize: isMobile ? 'clamp(32px,8vw,48px)' : 'clamp(36px,4vw,56px)',fontWeight:700,color:'white',margin:'0 0 24px',letterSpacing:'-0.02em',lineHeight:1.1}}>
               Start Your
               <br />
               <span style={{background:'linear-gradient(135deg,#3B82F6,#06B6D4)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>Next Project</span>
             </h2>
-            <p style={{color:'#94A3B8',fontSize:17,lineHeight:1.75,marginBottom:40,maxWidth:420}}>
+            <p style={{color:'#94A3B8',fontSize: isMobile ? 15 : 17,lineHeight:1.75,marginBottom:40,maxWidth:420}}>
               Tell us about your project and we will get back to you within 24 hours with a detailed proposal.
             </p>
             <div style={{display:'flex',flexDirection:'column',gap:20}}>
@@ -77,14 +84,16 @@ export default function Contact() {
                   </div>
                   <div>
                     <div style={{color:'#64748B',fontSize:12,marginBottom:2}}>{item.label}</div>
-                    <div style={{color:'#CBD5E1',fontSize:15,fontWeight:500}}>{item.value}</div>
+                    <div style={{color:'#CBD5E1',fontSize: isMobile ? 13 : 15,fontWeight:500,wordBreak:'break-all'}}>{item.value}</div>
                   </div>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          <motion.div initial={{opacity:0,x:40}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.9,delay:0.2}} style={{flex:1,background:'rgba(255,255,255,0.025)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:24,padding:'48px'}}>
+          <motion.div initial={{opacity:0,x: isMobile ? 0 : 40}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.9,delay:0.2}}
+            style={{flex:1,background:'rgba(255,255,255,0.025)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:24,padding: isMobile ? '28px 20px' : '48px',width:'100%'}}
+          >
             {status === 'success' ? (
               <motion.div initial={{opacity:0,scale:0.9}} animate={{opacity:1,scale:1}} style={{textAlign:'center',padding:'40px 0'}}>
                 <CheckCircle2 size={64} color='#10B981' style={{marginBottom:24}} />
@@ -95,14 +104,14 @@ export default function Contact() {
                 </button>
               </motion.div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',gap:20}}>
+              <form onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',gap:20}}>
                 <h3 style={{fontFamily:'Space Grotesk,sans-serif',fontSize:22,fontWeight:600,color:'white',margin:'0 0 8px'}}>Send Us A Message</h3>
                 {status === 'error' && (
                   <div style={{padding:'12px 16px',borderRadius:10,background:'rgba(239,68,68,0.1)',border:'1px solid rgba(239,68,68,0.3)',color:'#FCA5A5',fontSize:14}}>
                     Something went wrong. Please email us directly at 8unitechnologies@gmail.com
                   </div>
                 )}
-                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+                <div style={{display:'grid',gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',gap:16}}>
                   <div>
                     <label style={{color:'#64748B',fontSize:12,fontWeight:500,letterSpacing:'0.05em',textTransform:'uppercase',display:'block',marginBottom:8}}>Your Name</label>
                     <input required style={inputStyle} placeholder='John Smith' value={form.from_name} onChange={e=>setForm({...form,from_name:e.target.value})}

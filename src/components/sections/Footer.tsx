@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Mail } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const links = {
   Services: ['Custom Software','AI Solutions','Web Development','Mobile Apps','Cloud & DevOps','UI/UX Design'],
@@ -16,10 +16,19 @@ const socials = [
 ];
 
 export default function Footer() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
-    <footer style={{padding:'80px 48px 40px',borderTop:'1px solid rgba(255,255,255,0.05)',position:'relative'}}>
+    <footer style={{padding: isMobile ? '60px 20px 30px' : '80px 48px 40px',borderTop:'1px solid rgba(255,255,255,0.05)',position:'relative'}}>
       <div style={{maxWidth:1400,margin:'0 auto'}}>
-        <div style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr',gap:48,marginBottom:64}}>
+        <div style={{display:'grid',gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr 1fr 1fr',gap: isMobile ? 40 : 48,marginBottom:64}}>
 
           <div>
             <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:20}}>
@@ -37,8 +46,8 @@ export default function Footer() {
               {socials.map((s) => (
                 <a key={s.label} href={s.href}
                   style={{width:38,height:38,borderRadius:10,background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',display:'flex',alignItems:'center',justifyContent:'center',color:'#94A3B8',textDecoration:'none',fontSize:11,fontWeight:700,fontFamily:'Space Grotesk,sans-serif',transition:'all 0.2s'}}
-                  onMouseEnter={e => { e.currentTarget.style.background='rgba(59,130,246,0.15)'; e.currentTarget.style.color='#3B82F6'; e.currentTarget.style.borderColor='rgba(59,130,246,0.3)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background='rgba(255,255,255,0.04)'; e.currentTarget.style.color='#94A3B8'; e.currentTarget.style.borderColor='rgba(255,255,255,0.08)'; }}
+                  onMouseEnter={e => { e.currentTarget.style.background='rgba(59,130,246,0.15)'; e.currentTarget.style.color='#3B82F6'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background='rgba(255,255,255,0.04)'; e.currentTarget.style.color='#94A3B8'; }}
                 >
                   {s.label}
                 </a>
@@ -54,7 +63,7 @@ export default function Footer() {
               <ul style={{listStyle:'none',padding:0,margin:0,display:'flex',flexDirection:'column',gap:10}}>
                 {items.map(item => (
                   <li key={item}>
-                    <a href="#" style={{color:'#64748B',fontSize:14,textDecoration:'none',transition:'color 0.2s'}}
+                    <a href='#' style={{color:'#64748B',fontSize:14,textDecoration:'none',transition:'color 0.2s',wordBreak:'break-all'}}
                       onMouseEnter={e => (e.currentTarget.style.color='#CBD5E1')}
                       onMouseLeave={e => (e.currentTarget.style.color='#64748B')}
                     >
@@ -65,18 +74,12 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-
         </div>
 
-        <div style={{borderTop:'1px solid rgba(255,255,255,0.05)',paddingTop:32,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:16}}>
-          <p style={{color:'#475569',fontSize:13,margin:0}}>
-            © 2025 8 Unit Technologies. All rights reserved.
-          </p>
-          <p style={{color:'#475569',fontSize:13,margin:0}}>
-            Engineered with precision in South Africa 🇿🇦
-          </p>
+        <div style={{borderTop:'1px solid rgba(255,255,255,0.05)',paddingTop:32,display:'flex',flexDirection: isMobile ? 'column' : 'row',justifyContent:'space-between',alignItems: isMobile ? 'flex-start' : 'center',gap:12}}>
+          <p style={{color:'#475569',fontSize:13,margin:0}}>© 2025 8 Unit Technologies. All rights reserved.</p>
+          <p style={{color:'#475569',fontSize:13,margin:0}}>Engineered with precision in South Africa 🇿🇦</p>
         </div>
-
       </div>
     </footer>
   );
