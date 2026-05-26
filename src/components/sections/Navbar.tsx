@@ -85,7 +85,7 @@ export default function Navbar() {
 
           {isMobile && (
             <button onClick={() => setMobileOpen(!mobileOpen)}
-              style={{background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:8,padding:'7px 10px',color:'white',cursor:'pointer',fontSize:12,fontWeight:500,flexShrink:0}}
+              style={{background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:8,padding:'7px 10px',color:'white',cursor:'pointer',fontSize:12,fontWeight:500,flexShrink:0,marginRight:8}}
             >
               {mobileOpen ? 'Close' : 'Menu'}
             </button>
