@@ -11,7 +11,7 @@ import SectionReveal from '@/components/animations/SectionReveal';
 
 export default function Home() {
   return (
-    <main style={{minHeight:'100vh',background:'#050816'}}>
+    <main style={{minHeight:'100vh',background:'#050816',overflowX:'hidden',width:'100%',maxWidth:'100vw'}}>
       <NoiseBackground />
       <Navbar />
       <Hero />

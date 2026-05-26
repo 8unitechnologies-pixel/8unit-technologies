@@ -41,7 +41,7 @@ export default function Navbar() {
         transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
       }}
     >
-      <div style={{maxWidth:1400,margin:'0 auto',padding:'0 12px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:12}}>
+      <div style={{maxWidth:1400,margin:'0 auto',padding:'0 32px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:12}}>
 
         <Link href='/' style={{display:'flex',alignItems:'center',gap:6,textDecoration:'none',flexShrink:0,minWidth:0}}>
           <div style={{width:34,height:34,borderRadius:8,background:'linear-gradient(135deg,#3B82F6,#8B5CF6)',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontFamily:'Space Grotesk,sans-serif',fontWeight:700,fontSize:12,boxShadow:'0 0 20px rgba(59,130,246,0.4)',flexShrink:0}}>

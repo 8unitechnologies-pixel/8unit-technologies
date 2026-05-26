@@ -1,4 +1,6 @@
-'use client';
+const fs = require('fs');
+
+const content = `'use client';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { ArrowRight, ChevronDown } from 'lucide-react';
@@ -138,4 +140,7 @@ export default function Hero() {
 
     </section>
   );
-}
+}`;
+
+fs.writeFileSync('src/components/sections/Hero.tsx', content);
+console.log('Hero written successfully!');

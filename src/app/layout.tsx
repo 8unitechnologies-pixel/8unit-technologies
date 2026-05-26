@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import SmoothScroll from '@/components/animations/SmoothScroll';
-import CustomCursor from '@/components/ui/CustomCursor';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 
 export const metadata: Metadata = {
@@ -12,10 +11,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
-      <body style={{background:'#050816',color:'white',margin:0,padding:0,overflowX:'hidden',WebkitFontSmoothing:'antialiased'}}>
+    <html lang='en' style={{overflowX:'hidden'}}>
+      <body style={{background:'#050816',color:'white',margin:0,padding:0,overflowX:'hidden',WebkitFontSmoothing:'antialiased',position:'relative'}}>
         <SmoothScroll />
-        <div className='desktop-only-cursor'><CustomCursor /></div>
         <ScrollProgress />
         <div className='noise-overlay' aria-hidden='true' />
         {children}

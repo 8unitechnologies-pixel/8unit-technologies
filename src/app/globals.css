@@ -35,17 +35,14 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 0px;
+  display: none;
 }
 ::-webkit-scrollbar-track {
-  background: #050816;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3B82F6;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #06B6D4;
+  background: transparent;
 }
 
 /* Selection */
@@ -132,8 +129,14 @@ body {
 
 
 
+
+
+
+
 /* Mobile responsive */
 @media (max-width: 900px) {
 }
-@media (max-width: 400px) {
+html {
+}
+body {
 }

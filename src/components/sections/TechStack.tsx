@@ -37,7 +37,7 @@ export default function TechStack() {
           </p>
         </motion.div>
 
-        <div style={{display:'flex',flexWrap:'wrap',gap:16,justifyContent:'center'}}>
+        <div style={{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center',width:'100%'}}>
           {techs.map((tech, i) => (
             <motion.div
               key={tech.name}

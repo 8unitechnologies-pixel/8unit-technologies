@@ -32,7 +32,7 @@ export default function Process() {
           </p>
         </motion.div>
 
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:2}}>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(300px,100%),1fr))',gap:2}}>
           {steps.map((step, i) => (
             <motion.div
               key={step.num}

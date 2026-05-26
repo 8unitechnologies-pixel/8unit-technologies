@@ -24,7 +24,7 @@ export default function Services() {
           <h2 style={{fontFamily:'Space Grotesk,sans-serif',fontSize:'clamp(36px,4vw,56px)',fontWeight:700,color:'white',margin:'0 0 16px',letterSpacing:'-0.02em'}}>Our Services</h2>
           <p style={{color:'#94A3B8',fontSize:18,maxWidth:560,margin:'0 auto',lineHeight:1.6}}>Full-spectrum technology solutions engineered for modern businesses that refuse to compromise.</p>
         </motion.div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(380px,1fr))',gap:24}}>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(380px,100%),1fr))',gap:24}}>
           {serviceList.map((svc, i) => {
             const Icon = svc.icon;
             const isOpen = expanded === i;
