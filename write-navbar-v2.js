@@ -1,4 +1,6 @@
-'use client';
+const fs = require('fs');
+
+const content = `'use client';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -116,4 +118,7 @@ export default function Navbar() {
       )}
     </motion.header>
   );
-}
+}`;
+
+fs.writeFileSync('src/components/sections/Navbar.tsx', content);
+console.log('Navbar written!');
